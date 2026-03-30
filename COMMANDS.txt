@@ -1,0 +1,96 @@
+JOB BOT - COMMANDS & FLAGS
+==========================
+
+
+ADDING COMPANIES
+----------------
+
+/add <company name>
+  Auto-discovers the company's career page URL.
+  Example: /add Google
+
+/add <company name> | <category>
+  Auto-discovers the URL and filters jobs by department.
+  Example: /add Google | IT
+  Example: /add Amazon | Warehouse, Logistics
+
+/addurl <name> <url>
+  Adds a company with a direct URL.
+  Example: /addurl "Home Depot" https://careers.homedepot.com
+
+/addurl <name> <url> <category>
+  Adds a company with a direct URL and department filter.
+  Example: /addurl "Home Depot" https://careers.homedepot.com IT
+
+/addurl <name> <url> browser
+  Forces the bot to use a real browser for this site.
+  Use this for sites with search forms or JS-rendered content.
+  Example: /addurl "Chase" https://jpmc.fa.oraclecloud.com/... browser
+
+
+BULK IMPORT
+-----------
+
+/bulkadd
+  Attach a .txt file to this command to add multiple companies at once.
+  One company per line.
+
+  Supported formats in the txt file:
+    Company Name
+    Company Name | Category
+    Company Name | Category1, Category2
+    Company Name https://direct-url.com
+    Company Name https://direct-url.com | Category
+
+  Example file:
+    Google
+    Stripe | Engineering, Data
+    Home Depot https://careers.homedepot.com | Warehouse
+    Chase https://jpmc.fa.oraclecloud.com/... browser
+
+
+REMOVING COMPANIES
+------------------
+
+/remove <company name>
+  Stops watching a company.
+  Example: /remove Google
+
+
+PREFERENCES
+-----------
+
+/setpref keywords <keywords>
+  Sets job title keywords. Comma separated. Applies to all companies.
+  Example: /setpref keywords IT support, help desk, technician
+
+/setpref location <location>
+  Sets your preferred location (informational, used in searches).
+  Example: /setpref location remote
+
+/prefs
+  Shows all current preferences.
+
+
+VIEWING & SEARCHING
+-------------------
+
+/list
+  Shows all tracked companies with their ATS type and category filter.
+
+/search
+  Runs a job search right now instead of waiting for 8 AM.
+
+/help2
+  Shows the command list inside Discord.
+
+
+NOTES
+-----
+- The bot runs a search automatically every day at 8 AM.
+- It only posts jobs it hasn't seen before (no duplicates).
+- Keywords filter applies globally to all companies.
+- Category filter applies per company and checks job title, department, and description.
+- A job must match BOTH keywords AND category (if set) to be posted.
+- Sites that require login or CAPTCHA cannot be scraped.
+- For sites with search forms or dropdowns, use the "browser" flag with /addurl.
