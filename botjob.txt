@@ -1,11 +1,11 @@
 Google
-Bank of America
+Bank of America https://careers.bankofamerica.com/en-us/job-search?ref=search&search=getAllJobs&rows=10&start=0
 Stripe
-Amazon
+Amazon https://amazon.jobs/en/search/
 Fortinet
 Palo Alto
 CISCO
-Chase
+Chase https://jpmc.fa.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1001/jobs
 Conduent
 Sutherland
 Anthropic https://www.anthropic.com/careers/jobs
@@ -18,6 +18,6 @@ Dark Horse Tech https://www.darkhorsetech.com/careers
 Convergys
 TTEC
 Amazon AWS Support
-Apple At Home
+Apple At Home https://jobs.apple.com/en-us/search?search=it%20support&sort=relevance&location=united-states-USA
 Dell Technologies
 Payroc

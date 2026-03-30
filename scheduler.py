@@ -2,8 +2,16 @@
 Daily job search runner. Called by the scheduler and also on-demand.
 """
 import asyncio
+from concurrent.futures import ThreadPoolExecutor
 from database import get_all_preferences, list_sources, is_job_seen, mark_job_seen
 from scrapers import get_scraper
+
+_executor = ThreadPoolExecutor(max_workers=3)
+
+
+def _scrape_source(source, preferences):
+    scraper = get_scraper(source, preferences)
+    return scraper.fetch_jobs()
 
 
 async def run_job_search(send_message_callback):
@@ -23,11 +31,11 @@ async def run_job_search(send_message_callback):
         return
 
     total_new = 0
+    loop = asyncio.get_event_loop()
 
     for source in sources:
         try:
-            scraper = get_scraper(source, preferences)
-            jobs = scraper.fetch_jobs()
+            jobs = await loop.run_in_executor(_executor, _scrape_source, source, preferences)
         except Exception as e:
             await send_message_callback(f"Error scraping **{source['name']}**: {e}")
             continue
