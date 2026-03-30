@@ -26,24 +26,37 @@ def detect_ats(url: str) -> str | None:
 
 def search_career_page(company_name: str) -> str | None:
     """Search DuckDuckGo for the company's career page URL."""
-    query = f"{company_name} careers jobs site"
+    query = f"{company_name} official careers jobs"
+    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
     try:
         resp = requests.get(
             "https://html.duckduckgo.com/html/",
             params={"q": query},
-            headers={"User-Agent": "Mozilla/5.0"},
+            headers=headers,
             timeout=10
         )
-        # Extract URLs from results
         from bs4 import BeautifulSoup
+        from urllib.parse import unquote, parse_qs, urlparse
         soup = BeautifulSoup(resp.text, "html.parser")
+
+        # Try result__a links (DuckDuckGo main result links)
+        for a in soup.find_all("a", class_="result__a"):
+            href = a.get("href", "")
+            text = a.get_text(strip=True).lower()
+            if "uddg=" in href:
+                parsed = urlparse(href)
+                params = parse_qs(parsed.query)
+                if "uddg" in params:
+                    href = unquote(params["uddg"][0])
+            if any(word in text or word in href.lower() for word in ["career", "job", "work"]):
+                return href
+
+        # Fallback: try result__url links
         for a in soup.find_all("a", class_="result__url"):
             href = a.get("href", "")
             text = a.get_text(strip=True).lower()
             if any(word in text or word in href.lower() for word in ["career", "job", "work"]):
-                # Clean up DuckDuckGo redirect URLs
                 if "uddg=" in href:
-                    from urllib.parse import unquote, parse_qs, urlparse
                     parsed = urlparse(href)
                     params = parse_qs(parsed.query)
                     if "uddg" in params:
@@ -51,6 +64,23 @@ def search_career_page(company_name: str) -> str | None:
                 return href
     except Exception:
         pass
+
+    # Last resort: try common career URL patterns
+    slug = company_name.lower().replace(" ", "").replace(".", "")
+    candidates = [
+        f"https://careers.{slug}.com",
+        f"https://jobs.{slug}.com",
+        f"https://{slug}.com/careers",
+        f"https://{slug}.com/jobs",
+    ]
+    for url in candidates:
+        try:
+            resp = requests.get(url, timeout=5, headers=headers, allow_redirects=True)
+            if resp.status_code == 200:
+                return resp.url
+        except Exception:
+            continue
+
     return None
 
 

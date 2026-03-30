@@ -1,2 +1,23 @@
-www.indeed.com
-https://www.anthropic.com/careers/jobs
+Google
+Bank of America
+Stripe
+Amazon
+Fortinet
+Palo Alto
+CISCO
+Chase
+Conduent
+Sutherland
+Anthropic https://www.anthropic.com/careers/jobs
+Huntress https://job-boards.greenhouse.io/huntress
+Home Depot https://careers.homedepot.com/shop-jobs/
+GitHub https://www.github.careers/careers-home/jobs
+Proton https://proton.me/careers#jobslist
+Dragos https://job-boards.greenhouse.io/dragos
+Dark Horse Tech https://www.darkhorsetech.com/careers
+Convergys
+TTEC
+Amazon AWS Support
+Apple At Home
+Dell Technologies
+Payroc
