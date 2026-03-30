@@ -4,6 +4,26 @@ A Discord bot that automatically searches company career pages daily and posts n
 
 ---
 
+## 🤖 A Note on How This Was Built
+
+This project was developed collaboratively with [Claude (Anthropic)](https://www.anthropic.com/claude) as an AI coding assistant. I'm a self-taught career changer transitioning into IT, not a professional developer. I have a working understanding of Python syntax and can read and somewhat modify the code and used Claude to help generate, explain, and refine the code throughout this project. 
+
+**What I brought to it:**
+- The original idea, use case, and requirements
+- All architectural decisions (bot structure, scraper strategy, ATS detection approach, SQLite schema)
+- Feature design and command layout
+- Testing, troubleshooting, and iteration based on real-world results
+- Understanding the codebase well enough to use, explain, and extend it
+
+**What AI helped with:**
+- Writing and debugging Python code beyond my current skill level
+- Translating my ideas into working implementations
+- Explaining concepts as we built, so I could learn along the way
+
+I'm sharing this because I believe transparency about AI-assisted development matters, and because knowing how to effectively leverage AI tools is itself a real and valuable skill in 2026.
+
+---
+
 ## What It Does
 
 - Monitors company career pages for new job postings
